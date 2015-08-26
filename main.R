@@ -258,9 +258,6 @@ dev.off()
 word.toremove <- c(stopwords("en"), stopwords("fr"), 
                    "!")
 
-library(SnowballC)
-library(RColorBrewer)
-library(wordcloud)
 df.lol <- df
 df.lol$msg <- gsub('[?]+','',df.lol$msg)
 df.lol$msg <- gsub('[!]+','',df.lol$msg)
