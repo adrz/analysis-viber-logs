@@ -160,7 +160,7 @@ msgperhour <- df %>%
 
 # Histogram number of messages per hour
 brs <- c(1, seq(4, 24, by = 4))
-labs <- c("1:00am", "4:00am", "8:00am", "12:00am", "4:00pm", "8:00pm", "12:00pm")
+labs <- c("1:00am", "4:00am", "8:00am", "12:00pm", "4:00pm", "8:00pm", "12:00am")
 ggplot(data=msgperhour, aes(x=hours, y=msg.count))+geom_histogram(stat="identity")+
   theme_mini(1.2) + ylab("number of the msgs") + xlab("hour of the day") +
   ggtitle("When the messages are sent during a day")+
