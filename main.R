@@ -245,11 +245,11 @@ corpus <- corpus %>%
 v <- sort(rowSums(as.matrix(corpus)), decreasing=TRUE)
 df.word <- data.frame(classement=1:length(v), word=names(v), freq=v)
 
-png("wordcloud-him.png", width=1280, height=800)
-wordcloud(words = df.word$word, freq = df.word$freq, min.freq = 1,
-          max.words=40, random.order=FALSE, rot.per=0.15, scale=c(12,.3),
-          colors=pal, vfont=c("sans serif","bold"))
-dev.off()
+#png("wordcloud-him.png", width=1280, height=800)
+#wordcloud(words = df.word$word, freq = df.word$freq, min.freq = 1,
+#          max.words=40, random.order=FALSE, rot.per=0.15, scale=c(12,.3),
+#          colors=pal, vfont=c("sans serif","bold"))
+#dev.off()
 
 
 
@@ -317,7 +317,7 @@ ggpie(df.lulz, by='x', total='y')+theme_mini(1.8)+
   legend.position="none") +
   ggtitle("How we e-laugh!")
 
-ggsave("figs/e-laught.png", width = 5, height = 5)
+#ggsave("figs/e-laugh.png", width = 5, height = 5)
 
 
 ggpie(df.luve, by='x', total='y')+theme_mini(1.8)+ 
