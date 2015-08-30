@@ -46,7 +46,8 @@ ggplot(data=df.senders, aes(x=sender,y=count, fill=sender))+geom_bar(stat="ident
 df.diff <- df %>%
   mutate( is.diff.sender = (sender != lag(sender))) %>%
   filter( is.diff.sender ) %>%
-  select( posix.date, sender ) %>%
+  select( posix.date, sender, msg ) %>%
+  mutate(lag.msg = lag(msg))%>%
   mutate( diff.time = as.numeric(posix.date - lag(posix.date) ) ) %>%
   filter(!is.na(diff.time))
 
@@ -100,15 +101,15 @@ df.msg.day <- df %>%
 
 source("calendarHeat.R")
 
-png(filename="figs/calendar-day.png", 
-    type="cairo",
-    units="in", 
-    width=7,
-    height=5, 
-    pointsize=2.5, 
-    res=96*2)
+#png(filename="figs/calendar-day.png", 
+#    type="cairo",
+#    units="in", 
+#    width=7,
+#    height=5, 
+#    pointsize=2.5, 
+#    res=96*2)
 calendarHeat(df.msg.day$day, df.msg.day$count,ncolors = 4, color = "y2r", varname = "")
-dev.off()
+#dev.off()
 
 
 df.msg.day.user <- df.round %>%
@@ -165,7 +166,7 @@ ggplot(data=msgperhour, aes(x=hours, y=msg.count))+geom_histogram(stat="identity
   theme_mini(1.2) + ylab("number of the msgs") + xlab("hour of the day") +
   ggtitle("When the messages are sent during a day")+
   scale_x_continuous(breaks = brs, labels=labs)
-ggsave("figs/hist-hours.png", width=5, height=3)
+#ggsave("figs/hist-hours.png", width=5, height=3)
 
 
 
@@ -221,12 +222,12 @@ corpus <- corpus %>%
 v <- sort(rowSums(as.matrix(corpus)), decreasing=TRUE)
 df.word <- data.frame(classement=1:length(v), word=names(v), freq=v)
 
-png("wordcloud-her.png", width=1280, height=800)
+#png("wordcloud-her.png", width=1280, height=800)
 
-wordcloud(words = df.word$word, freq = df.word$freq, min.freq = 1,
-          max.words=40, random.order=FALSE, rot.per=0.15, scale=c(12,.3),
-          colors=pal, vfont=c("sans serif","bold"))
-dev.off()
+#wordcloud(words = df.word$word, freq = df.word$freq, min.freq = 1,
+#          max.words=40, random.order=FALSE, rot.per=0.15, scale=c(12,.3),
+#          colors=pal, vfont=c("sans serif","bold"))
+#dev.off()
 
 
 
@@ -314,9 +315,9 @@ ggpie(df.lulz, by='x', total='y')+theme_mini(1.8)+
   axis.title=element_blank(),
   panel.grid.major=element_blank(),
   legend.position="none") +
-  ggtitle("How we e-laught!")
+  ggtitle("How we e-laugh!")
 
-#ggsave("figs/e-laught.png", width = 5, height = 5)
+ggsave("figs/e-laught.png", width = 5, height = 5)
 
 
 ggpie(df.luve, by='x', total='y')+theme_mini(1.8)+ 
